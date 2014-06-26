@@ -1,3 +1,4 @@
+/* Pipelined Vector Multiply and Compute Maximum */
 module testbench_vmulmax();
 
 timeunit 10ns;
