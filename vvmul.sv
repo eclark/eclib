@@ -42,16 +42,16 @@ logic [VECTOR_SIZE-1:0][INT_SIZE-1:0] mult, mult_reg;
 
 genvar i;
 generate
-  for (i = 0; i < VECTOR_SIZE; i++) begin
+  for (i = 0; i < VECTOR_SIZE; i++) begin : u
     always_comb mult[i] = a[i] * x[i];
   end
 endgenerate
 
 always_ff @ (posedge clock or negedge resetn) begin
   if (~resetn)
-    y = '0;
+    y <= '0;
   else
-    y = mult;
+    y <= mult;
 end
 
 endmodule

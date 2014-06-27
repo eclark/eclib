@@ -40,7 +40,7 @@ generate
     // Max stage k
     logic [VECTOR_SIZE/(2<<j) - 1:0][INT_SIZE-1:0] max, max_reg;
 
-    for (k = 0; k < VECTOR_SIZE/(2<<j); k++) begin
+    for (k = 0; k < VECTOR_SIZE/(2<<j); k++) begin : u
       if (j == 0)
         always_comb max[k] = x[2*k] < x[2*k+1] ? x[2*k+1] : x[2*k];
       else
@@ -49,9 +49,9 @@ generate
 
     always_ff @ (posedge clock or negedge resetn) begin
       if (~resetn)
-        max_reg = '0;
+        max_reg <= '0;
       else
-        max_reg = max;
+        max_reg <= max;
     end
   end
 endgenerate

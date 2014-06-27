@@ -40,7 +40,7 @@ generate
     // Sum stage k
     logic [VECTOR_SIZE/(2<<j) - 1:0][INT_SIZE-1:0] sum, sum_reg;
 
-    for (k = 0; k < VECTOR_SIZE/(2<<j); k++) begin
+    for (k = 0; k < VECTOR_SIZE/(2<<j); k++) begin : u
       if (j == 0)
         always_comb sum[k] = x[2*k+1] + x[2*k];
       else
@@ -49,9 +49,9 @@ generate
 
     always_ff @ (posedge clock or negedge resetn) begin
       if (~resetn)
-        sum_reg = '0;
+        sum_reg <= '0;
       else
-        sum_reg = sum;
+        sum_reg <= sum;
     end
   end
 endgenerate
